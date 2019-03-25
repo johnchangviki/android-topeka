@@ -21,7 +21,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "com.google.samples.apps.topeka"
+        applicationId "com.john.samples.apps.topeka"
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
         versionCode 1
