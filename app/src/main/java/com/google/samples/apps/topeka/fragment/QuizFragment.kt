@@ -19,9 +19,9 @@ package com.google.samples.apps.topeka.fragment
 import android.annotation.TargetApi
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.animation.FastOutLinearInInterpolator
+import androidx.fragment.app.Fragment
+import androidx.core.view.ViewCompat
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -130,13 +130,16 @@ class QuizFragment : Fragment() {
         activity?.requestLogin { player ->
                 if (player.valid()) {
                     avatarView?.setAvatar(player.avatar!!.drawableId)
-                    with(ViewCompat.animate(avatarView)) {
-                        interpolator = FastOutLinearInInterpolator()
-                        startDelay = 500
-                        scaleX(1f)
-                        scaleY(1f)
-                        start()
+                    avatarView?.let {
+                        with(ViewCompat.animate(it)) {
+                            interpolator = FastOutLinearInInterpolator()
+                            startDelay = 500
+                            scaleX(1f)
+                            scaleY(1f)
+                            start()
+                        }
                     }
+
                 }
             }
         }

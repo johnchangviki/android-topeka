@@ -20,12 +20,12 @@ import android.annotation.TargetApi
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.app.Fragment
-import android.support.v4.util.Pair
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.animation.FastOutSlowInInterpolator
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.core.app.ActivityOptionsCompat
+import androidx.fragment.app.Fragment
+import androidx.core.util.Pair
+import androidx.core.view.ViewCompat
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import android.text.Editable
 import android.text.TextWatcher
 import android.transition.Transition
@@ -236,12 +236,14 @@ class SignInFragment : Fragment() {
     }
 
     private fun removeDoneFab(endAction: () -> Unit) {
-        ViewCompat.animate(doneFab)
-                .scaleX(0f)
-                .scaleY(0f)
-                .setInterpolator(FastOutSlowInInterpolator())
-                .withEndAction(endAction)
-                .start()
+        doneFab?.let {
+            ViewCompat.animate(it)
+                    .scaleX(0f)
+                    .scaleY(0f)
+                    .setInterpolator(FastOutSlowInInterpolator())
+                    .withEndAction(endAction)
+                    .start()
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

@@ -26,7 +26,7 @@ android {
         targetSdkVersion rootProject.targetSdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -48,29 +48,29 @@ android {
 
 dependencies {
 
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
-    implementation "com.android.support:design:$supportLibVersion"
-    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
-    implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
+    implementation "androidx.appcompat:appcompat:$supportLibVersion"
+    implementation "com.google.android.material:material:$supportLibVersion"
+    implementation "androidx.recyclerview:recyclerview:$supportLibVersion"
+    implementation "androidx.test.espresso:espresso-idling-resource:$espressoVersion"
 
     implementation "com.google.android.gms:play-services-auth:$playServicesAuthVersion"
 
     testImplementation "junit:junit:$junitVersion"
 
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espressoVersion") {
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion") {
         exclude module: "espresso-idling-resource"
         exclude group: "com.android.support"
     }
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$espressoVersion") {
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:$espressoVersion") {
         exclude module: "espresso-core"
         exclude module: "recyclerview-v7"
         exclude group: "com.android.support"
     }
-    androidTestImplementation("com.android.support.test:rules:$androidTestVersion") {
+    androidTestImplementation("androidx.test:rules:$androidTestVersion") {
         exclude group: "com.android.support"
     }
 
-    androidTestImplementation("com.android.support.test:runner:$androidTestVersion") {
+    androidTestImplementation("androidx.test:runner:$androidTestVersion") {
         exclude group: "com.android.support"
     }
 

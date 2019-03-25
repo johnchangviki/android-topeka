@@ -3,8 +3,8 @@ package com.google.samples.apps.topeka.helper
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import com.google.samples.apps.topeka.activity.CategorySelectionActivity
 import com.google.samples.apps.topeka.activity.QuizActivity
 import com.google.samples.apps.topeka.activity.SignInActivity

@@ -23,17 +23,17 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.annotation.VisibleForTesting
-import android.support.design.widget.FloatingActionButton
-import android.support.test.espresso.idling.CountingIdlingResource
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.ViewPropertyAnimatorListenerAdapter
-import android.support.v4.view.animation.FastOutLinearInInterpolator
-import android.support.v4.view.animation.FastOutSlowInInterpolator
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.RequiresApi
+import androidx.annotation.VisibleForTesting
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.test.espresso.idling.CountingIdlingResource
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.Interpolator
@@ -115,11 +115,14 @@ class QuizActivity : AppCompatActivity() {
                                 sharedElements,
                                 sharedElementSnapshots)
                         // Make sure to perform this animation after the transition has ended.
-                        ViewCompat.animate(toolbarBack)
-                                .setStartDelay(startDelay)
-                                .scaleX(1f)
-                                .scaleY(1f)
-                                .alpha(1f)
+                        toolbarBack?.let {
+                            ViewCompat.animate(it)
+                                    .setStartDelay(startDelay)
+                                    .scaleX(1f)
+                                    .scaleY(1f)
+                                    .alpha(1f)
+                        }
+
                     }
                 })
 
@@ -208,45 +211,54 @@ class QuizActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
-        ViewCompat.animate(toolbarBack)
-                .scaleX(0f)
-                .scaleY(0f)
-                .alpha(0f)
-                .setDuration(100L)
-                .start()
+        toolbarBack?.let {
+            ViewCompat.animate(it)
+                    .scaleX(0f)
+                    .scaleY(0f)
+                    .alpha(0f)
+                    .setDuration(100L)
+                    .start()
+        }
 
         // Scale the icon and fab to 0 size before calling onBackPressed if it exists.
-        ViewCompat.animate(icon)
-                .scaleX(.7f)
-                .scaleY(.7f)
-                .alpha(0f)
-                .setInterpolator(interpolator)
-                .start()
+        icon?.let {
+            ViewCompat.animate(it)
+                    .scaleX(.7f)
+                    .scaleY(.7f)
+                    .alpha(0f)
+                    .setInterpolator(interpolator)
+                    .start()
+        }
 
-        ViewCompat.animate(quizFab)
-                .scaleX(0f)
-                .scaleY(0f)
-                .setInterpolator(interpolator)
-                .setStartDelay(100L)
-                .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                    @SuppressLint("NewApi")
-                    override fun onAnimationEnd(view: View?) {
-                        if (isFinishing ||
-                                ApiLevelHelper.isAtLeast(Build.VERSION_CODES.JELLY_BEAN_MR1) &&
-                                isDestroyed) return
-                        super@QuizActivity.onBackPressed()
-                    }
-                })
-                .start()
+
+        quizFab?.let {
+            ViewCompat.animate(it)
+                    .scaleX(0f)
+                    .scaleY(0f)
+                    .setInterpolator(interpolator)
+                    .setStartDelay(100L)
+                    .setListener(object : ViewPropertyAnimatorListenerAdapter() {
+                        @SuppressLint("NewApi")
+                        override fun onAnimationEnd(view: View?) {
+                            if (isFinishing ||
+                                    ApiLevelHelper.isAtLeast(Build.VERSION_CODES.JELLY_BEAN_MR1) &&
+                                    isDestroyed) return
+                            super@QuizActivity.onBackPressed()
+                        }
+                    })
+                    .start()
+        }
     }
 
     private fun startQuizFromClickOn(clickedView: View) {
         initQuizFragment()
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.quiz_fragment_container, quizFragment, FRAGMENT_TAG)
-                .commit()
+        quizFragment?.let {
+            supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.quiz_fragment_container, it, FRAGMENT_TAG)
+                    .commit()
+        }
+
         val container = (findViewById<FrameLayout>(R.id.quiz_fragment_container)).apply {
             setBackgroundColor(ContextCompat.getColor(
                     this@QuizActivity,
@@ -373,12 +385,14 @@ class QuizActivity : AppCompatActivity() {
                     scaleX = 0f
                     scaleY = 0f
                 }
-                ViewCompat.animate(quizFab)
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setInterpolator(interpolator)
-                        .setListener(null)
-                        .start()
+                quizFab?.let {
+                    ViewCompat.animate(it)
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .setInterpolator(interpolator)
+                            .setListener(null)
+                            .start()
+                }
             }
         }
 
