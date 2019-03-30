@@ -20,11 +20,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.instantapps.InstantApps
 import com.google.samples.apps.topeka.persistence.TopekaDatabaseHelper
 
 const val TAG = "Topeka"
 
-fun Context.database() = TopekaDatabaseHelper.getInstance(this)
+fun Context.database() = TopekaDatabaseHelper.getInstance(this,
+        if(InstantApps.isInstantApp(this))
+                resources.assets.open("instant_categories.json")
+        else
+                resources.assets.open("categories.json"))
 
 fun Context.inflate(resource: Int, root: ViewGroup?, attachToRoot: Boolean): View =
         LayoutInflater.from(this).inflate(resource, root, attachToRoot)

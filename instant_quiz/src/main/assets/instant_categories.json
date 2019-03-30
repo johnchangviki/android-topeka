@@ -1,0 +1,244 @@
+[
+  {
+    "name": "Food & Drink",
+    "id": "food",
+    "theme": "green",
+    "quizzes": [
+      {
+        "type": "four-quarter",
+        "question": "Name the Italian, semi-soft, rich cheese with blue veins through it.",
+        "options": [
+          "Ricotta",
+          "Blue Cheese",
+          "Gorgonzola",
+          "Parmesan"
+        ],
+        "answer": [2]
+      },
+      {
+        "type": "true-false",
+        "question": "Coffee beans contain more caffeine than tea leaves.",
+        "answer": false
+      },
+      {
+        "type": "multi-select",
+        "question": "What are the three ingredients in mead (spices excluded)?",
+        "options": [
+          "Sugar",
+          "Honey",
+          "Cinnamon",
+          "Water",
+          "Brown Sugar",
+          "Yeast",
+          "Salt"
+        ],
+        "answer": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "type": "four-quarter",
+        "question": "What crop does the Colorado Beetle attack?",
+        "options": [
+          "Corn",
+          "Garlic",
+          "Potato",
+          "Wheat"
+        ],
+        "answer": [2]
+      },
+      {
+        "type": "single-select-item",
+        "question": "What vegetable did Mark Twain describe as “cabbage with a college education”?",
+        "options": [
+          "Spinach",
+          "Broccoli",
+          "Cauliflower",
+          "Kale"
+        ],
+        "answer": [2]
+      },
+      {
+        "type": "fill-blank",
+        "question": "What name is given to a sugar syrup which is gently heated until it browns?",
+        "answer": "Caramel"
+      },
+      {
+        "type": "single-select",
+        "question": "In Which city was chop suey invented?",
+        "options": [
+          "Hong Kong",
+          "Taipei",
+          "New York",
+          "San Francisco"
+        ],
+        "answer": [3]
+      },
+      {
+        "type": "picker",
+        "question": "One of the fattiest fishes is salmon. 4 ounces contains how many grams of fat?",
+        "min": 1,
+        "max": 10,
+        "answer": 9
+      },
+      {
+        "type": "fill-blank",
+        "question": "In which American State did chili con carne originate?",
+        "answer": "Texas"
+      },
+      {
+        "type": "four-quarter",
+        "question": "What is the correct name for a cluster or bunch of bananas?",
+        "options": [
+          "Foot",
+          "Hand",
+          "Flock",
+          "Pod"
+        ],
+        "answer": [1]
+      }
+    ],
+    "scores": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "solved": "false"
+  },
+  {
+    "name": "General Knowledge",
+    "id": "knowledge",
+    "theme": "yellow",
+    "quizzes": [
+      {
+        "type": "fill-blank",
+        "question": "Mole is a popular paste in Mexico. Mole is a mixture of chili’s and what other tasty ingredient?",
+        "answer": "Chocolate"
+      },
+      {
+        "type": "four-quarter",
+        "question": "What is the name of the famous art deco skyscraper in New York City?",
+        "options": [
+          "Trump Tower",
+          "Chrysler building",
+          "Empire State Building",
+          "The New York Times Building"
+        ],
+        "answer": [1]
+      },
+      {
+        "type": "multi-select",
+        "question": "Select the names of “The Three Musketeers”.",
+        "options": [
+          "Chevy",
+          "Topeka",
+          "Athos",
+          "Duke",
+          "Porthos",
+          "John Felton",
+          "Aramis"
+        ],
+        "answer": [
+          2,
+          4,
+          6
+        ]
+      },
+      {
+        "type": "toggle-translate",
+        "question": "Which is the correct translation of Zorro?",
+        "options": [
+          [
+            "Zorro",
+            "Dog"
+          ],
+          [
+            "Zorro",
+            "Sword"
+          ],
+          [
+            "Zorro",
+            "Fox"
+          ],
+          [
+            "Zorro",
+            "Coyote"
+          ]
+        ],
+        "answer": [2]
+      },
+      {
+        "type": "single-select-item",
+        "question": "Which 1971 film, known for its violence, was the first to use Dolby sound?",
+        "options": [
+          "Straw Dogs",
+          "Dirty Harry",
+          "A Clockwork Orange",
+          "Play Misty for me"
+        ],
+        "answer": [2]
+      },
+      {
+        "type": "picker",
+        "question": "How many counters does a backgammon player have?",
+        "min": 0,
+        "max": 30,
+        "answer": 15
+      },
+      {
+        "type": "true-false",
+        "question": "There is a patron saint of The Internet.",
+        "answer": true
+      },
+      {
+        "type": "alpha-picker",
+        "question": " Which letter other than X scores 8 in Scrabble?",
+        "answer": "J"
+      },
+      {
+        "type": "four-quarter",
+        "question": "Four of the worst ten maritime disasters all took place in 1945. In which sea were all four ships sunk?",
+        "options": [
+          "Mediterranean sea",
+          "Baltic Sea",
+          "The Bermuda Triangle",
+          "Black Sea"
+        ],
+        "answer": [1]
+      },
+      {
+        "type": "single-select",
+        "question": "What nut is used to flavor marzipan?",
+        "options": [
+          "Walnut",
+          "Almond",
+          "Cashew",
+          "Pistachio"
+        ],
+        "answer": [1]
+      }
+    ],
+    "scores": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "solved": "false"
+  }
+]

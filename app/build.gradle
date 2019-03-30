@@ -32,7 +32,8 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
+            // ERROR: Resource shrinker cannot be used for multi-apk applications
+            // shrinkResources true
             minifyEnabled true
         }
     }
@@ -46,9 +47,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    dynamicFeatures = [":instant_quiz", ":quiz"]
 }
 
 dependencies {
+    implementation "com.google.android.instantapps:instantapps:$instantAppsVer"
+    api "com.google.android.play:core:$playcore"
     implementation "androidx.appcompat:appcompat:$supportLibVersion"
     implementation "com.google.android.material:material:$supportLibVersion"
     implementation "androidx.recyclerview:recyclerview:$supportLibVersion"
@@ -71,5 +75,5 @@ dependencies {
         exclude group: "com.android.support"
     }
     androidTestImplementation "org.hamcrest:hamcrest-core:$hamcrestVersion"
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

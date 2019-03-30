@@ -20,12 +20,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.transition.TransitionInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.instantapps.InstantApps
 import com.google.samples.apps.topeka.R
 import com.google.samples.apps.topeka.fragment.CategorySelectionFragment
 import com.google.samples.apps.topeka.helper.ActivityLaunchHelper
@@ -41,8 +42,8 @@ import com.google.samples.apps.topeka.helper.requestLogin
 import com.google.samples.apps.topeka.model.Player
 import com.google.samples.apps.topeka.widget.AvatarView
 
-class CategorySelectionActivity : AppCompatActivity() {
 
+class CategorySelectionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_selection)
@@ -86,7 +87,12 @@ class CategorySelectionActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_category, menu)
+        menuInflater.inflate(
+            if(InstantApps.isInstantApp(this))
+                R.menu.instant_menu_category
+            else
+                R.menu.menu_category
+            , menu)
         return true
     }
 
@@ -113,7 +119,19 @@ class CategorySelectionActivity : AppCompatActivity() {
         return if (item.itemId == R.id.sign_out) {
             handleSignOut()
             true
+        } else if (item.itemId == R.id.install) {
+            handleInstallation()
+            true
         } else super.onOptionsItemSelected(item)
+    }
+
+    private fun handleInstallation() {
+        InstantApps.showInstallPrompt(
+            this,
+            Intent(this, SignInActivity::class.java),
+            1000,
+            "utm_source=instant_app&utm_campaign=aia_install"
+        )
     }
 
     @SuppressLint("NewApi")
@@ -125,6 +143,11 @@ class CategorySelectionActivity : AppCompatActivity() {
         logout()
         ActivityLaunchHelper.launchSignIn(this, true)
         supportFinishAfterTransition()
+    }
+
+    companion object {
+        private val REFERRER = "InstallApiActivity"
+        private val REQUEST_CODE = 7
     }
 }
 

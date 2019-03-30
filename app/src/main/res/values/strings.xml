@@ -28,4 +28,7 @@
     <string name="sign_out">Sign out</string>
     <string name="x_points">%1$d pts</string>
     <string name="back">back</string>
+    <string name="title_instant_quiz">instant_quiz</string>
+    <string name="title_quiz">quiz</string>
+    <string name="install">instant the app</string>
 </resources>

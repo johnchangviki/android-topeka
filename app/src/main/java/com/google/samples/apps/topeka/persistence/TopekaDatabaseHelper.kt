@@ -23,6 +23,7 @@ import android.content.res.Resources
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.ContactsContract
 import com.google.samples.apps.topeka.R
 import com.google.samples.apps.topeka.helper.toIntArray
 import com.google.samples.apps.topeka.helper.toStringArray
@@ -46,6 +47,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.Arrays
 import kotlin.collections.ArrayList
@@ -54,7 +56,8 @@ import kotlin.collections.ArrayList
  * Database for storing and retrieving info for categories and quizzes.
  */
 class TopekaDatabaseHelper private constructor(
-        context: Context
+        context: Context,
+        val rawCategories: InputStream
 ) : SQLiteOpenHelper(context.applicationContext, "topeka.db", null, 1) {
 
     private val resources: Resources = context.resources
@@ -64,17 +67,17 @@ class TopekaDatabaseHelper private constructor(
         with(db) {
             execSQL(CategoryTable.CREATE)
             execSQL(QuizTable.CREATE)
-            fillCategoriesAndQuizzes(db)
+            fillCategoriesAndQuizzes(db, rawCategories)
         }
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) = Unit
 
     @Throws(JSONException::class, IOException::class)
-    private fun fillCategoriesAndQuizzes(db: SQLiteDatabase) {
+    private fun fillCategoriesAndQuizzes(db: SQLiteDatabase, rawCategories: InputStream) {
         db.transact {
             val values = ContentValues() // reduce, reuse
-            val jsonArray = JSONArray(readCategoriesFromResources())
+            val jsonArray = JSONArray(readCategoriesFromResources(rawCategories))
             for (i in 0 until jsonArray.length()) {
                 with(jsonArray.getJSONObject(i)) {
                     val id = getString(JsonAttributes.ID)
@@ -85,10 +88,8 @@ class TopekaDatabaseHelper private constructor(
         }
     }
 
-    private fun readCategoriesFromResources(): String {
-        val rawCategories = resources.openRawResource(R.raw.categories)
+    private fun readCategoriesFromResources(rawCategories: InputStream): String {
         val reader = BufferedReader(InputStreamReader(rawCategories))
-
         return reader.readText()
     }
 
@@ -295,7 +296,7 @@ class TopekaDatabaseHelper private constructor(
         with(writableDatabase) {
             delete(CategoryTable.NAME, null, null)
             delete(QuizTable.NAME, null, null)
-            fillCategoriesAndQuizzes(this)
+            fillCategoriesAndQuizzes(this,rawCategories)
         }
     }
 
@@ -425,9 +426,9 @@ class TopekaDatabaseHelper private constructor(
 
         private var _instance: TopekaDatabaseHelper? = null
 
-        fun getInstance(context: Context): TopekaDatabaseHelper {
+        fun getInstance(context: Context, categories: InputStream): TopekaDatabaseHelper {
             return _instance ?: synchronized(TopekaDatabaseHelper::class) {
-                TopekaDatabaseHelper(context).also { _instance = it }
+                TopekaDatabaseHelper(context,categories).also { _instance = it }
             }
         }
     }
